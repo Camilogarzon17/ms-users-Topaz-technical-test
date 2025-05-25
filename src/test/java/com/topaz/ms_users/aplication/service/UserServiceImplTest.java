@@ -124,6 +124,42 @@ class UserServiceImplTest {
     }
 
     @Test
+    void updateUser_shouldNotUpdatePassword_whenNewPasswordIsNull() {
+        User updatedDetails = User.builder().username("updateduser").password(null).build();
+        User existingUser = User.builder().id(1L).username("olduser").password("oldencoded").build();
+
+        when(userPersistencePort.findById(1L)).thenReturn(Optional.of(existingUser));
+        when(userPersistencePort.save(any(User.class))).thenReturn(existingUser);
+
+        User result = userService.updateUser(1L, updatedDetails);
+
+        assertNotNull(result);
+        assertEquals("updateduser", result.getUsername());
+        assertEquals("oldencoded", result.getPassword()); // Password should remain unchanged
+        verify(userPersistencePort, times(1)).findById(1L);
+        verify(passwordEncoder, never()).encode(anyString()); // passwordEncoder should not be called
+        verify(userPersistencePort, times(1)).save(existingUser);
+    }
+
+    @Test
+    void updateUser_shouldNotUpdatePassword_whenNewPasswordIsEmpty() {
+        User updatedDetails = User.builder().username("updateduser").password("").build();
+        User existingUser = User.builder().id(1L).username("olduser").password("oldencoded").build();
+
+        when(userPersistencePort.findById(1L)).thenReturn(Optional.of(existingUser));
+        when(userPersistencePort.save(any(User.class))).thenReturn(existingUser);
+
+        User result = userService.updateUser(1L, updatedDetails);
+
+        assertNotNull(result);
+        assertEquals("updateduser", result.getUsername());
+        assertEquals("oldencoded", result.getPassword());
+        verify(userPersistencePort, times(1)).findById(1L);
+        verify(passwordEncoder, never()).encode(anyString());
+        verify(userPersistencePort, times(1)).save(existingUser);
+    }
+
+    @Test
     void updateUser_shouldThrowException_whenUserDoesNotExist() {
         User updatedDetails = User.builder().username("updateduser").build();
         when(userPersistencePort.findById(1L)).thenReturn(Optional.empty());
