@@ -1,11 +1,11 @@
 # Microservicio de Gestión de Usuarios con Spring Boot
 
-Este proyecto es un microservicio de gestión de usuarios que permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando Spring Boot. [cite: 2] Implementa la arquitectura hexagonal, buenas prácticas de programación, pruebas unitarias y gestión de seguridad básica.
+Este proyecto es un microservicio de gestión de usuarios que permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando Spring Boot. Implementa la arquitectura hexagonal, buenas prácticas de programación, pruebas unitarias y gestión de seguridad básica.
 
 ## 📌 Requerimientos Funcionales
 
-* **Gestión de Usuarios**: Operaciones CRUD para el modelo `User` con campos `ID` (autogenerado), `Nombre de usuario` y `Contraseña` (almacenada de forma encriptada). [cite: 4, 5]
-* **Documentación API**: Generación de documentación interactiva de la API utilizando OpenAPI 3 (Swagger). [cite: 5]
+* **Gestión de Usuarios**: Operaciones CRUD para el modelo `User` con campos `ID` (autogenerado), `Nombre de usuario` y `Contraseña` (almacenada de forma encriptada).
+* **Documentación API**: Generación de documentación interactiva de la API utilizando OpenAPI 3 (Swagger).
 * **Gestión de Errores**: Manejo adecuado de excepciones y provisión de mensajes de error significativos con códigos de estado HTTP adecuados. 
 
 ---
@@ -51,7 +51,6 @@ Apache Maven versión 3.6.0 o superior.
 
     ```bash
     git clone https://github.com/Camilogarzon17/ms-users-Topaz-technical-test.git
-    cd user_management
     ```
 2.  **Construir el proyecto con Maven:**
     ```bash
