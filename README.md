@@ -1,22 +1,23 @@
 # Microservicio de Gestión de Usuarios con Spring Boot
 
-Este proyecto es un microservicio de gestión de usuarios que permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando Spring Boot. [cite: 2] Implementa la arquitectura hexagonal, buenas prácticas de programación, pruebas unitarias y gestión de seguridad básica. [cite: 3, 8, 9, 10, 11]
+Este proyecto es un microservicio de gestión de usuarios que permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando Spring Boot. [cite: 2] Implementa la arquitectura hexagonal, buenas prácticas de programación, pruebas unitarias y gestión de seguridad básica.
 
 ## 📌 Requerimientos Funcionales
 
 * **Gestión de Usuarios**: Operaciones CRUD para el modelo `User` con campos `ID` (autogenerado), `Nombre de usuario` y `Contraseña` (almacenada de forma encriptada). [cite: 4, 5]
 * **Documentación API**: Generación de documentación interactiva de la API utilizando OpenAPI 3 (Swagger). [cite: 5]
-* **Gestión de Errores**: Manejo adecuado de excepciones y provisión de mensajes de error significativos con códigos de estado HTTP adecuados. [cite: 6, 7]
+* **Gestión de Errores**: Manejo adecuado de excepciones y provisión de mensajes de error significativos con códigos de estado HTTP adecuados. 
 
 ---
 
 ## ⚙️ Requerimientos Técnicos
 
-- **Arquitectura Hexagonal**: Separación clara entre capas de dominio, aplicación e infraestructura mediante interfaces. [cite: 8]
-- **Buenas Prácticas**: Aplicación de principios SOLID, código limpio y estándares de programación. [cite: 9]
-- **Pruebas Unitarias**: Uso de **JUnit** y **Mockito** con una cobertura mínima del 85%. Generación de informe con **JaCoCo**. [cite: 10, 11, 19]
-- **Seguridad y Calidad del Código**: Sin vulnerabilidades críticas o altas simuladas con buenas prácticas y análisis estático. [cite: 11, 20]
-- **Gestión del Proyecto**: Uso de **Maven** para la gestión de dependencias y construcción. [cite: 13]
+- **Arquitectura Hexagonal**: Separación clara entre capas de dominio, aplicación e infraestructura mediante interfaces. 
+- **Buenas Prácticas**: Aplicación de principios SOLID, código limpio y estándares de programación.
+- **Pruebas Unitarias**: Uso de **JUnit** y **Mockito** con una cobertura mínima del 85%. Generación de informe con **JaCoCo**. 
+  
+- **Seguridad y Calidad del Código**: Sin vulnerabilidades críticas o altas simuladas con buenas prácticas y análisis estático. 
+- **Gestión del Proyecto**: Uso de **Maven** para la gestión de dependencias y construcción. 
 
 ---
 
@@ -64,7 +65,7 @@ Apache Maven versión 3.6.0 o superior.
 
 ### Endpoints de la API:
 
-La documentación de la API interactiva está disponible en: `http://localhost:8080/swagger-ui.html`[cite: 5].
+La documentación de la API interactiva está disponible en: `http://localhost:8080/swagger-ui.html`.
 
 * `POST /topaz/v1/api/users`: Crear un nuevo usuario.
 * `GET /topaz/v1/api/users/{id}`: Obtener un usuario por ID.
@@ -74,15 +75,16 @@ La documentación de la API interactiva está disponible en: `http://localhost:8
 
 ## 📊 Cómo Generar el Informe de Cobertura de Pruebas
 
-Para generar el informe de cobertura de pruebas utilizando JaCoCo, ejecuta el siguiente comando Maven: [cite: 11, 16]
+Para generar el informe de cobertura de pruebas utilizando JaCoCo, ejecuta el siguiente comando Maven:
 
     ```bash
     mvn clean test jacoco:report
     ```
 
 **O si estás en Windows con wrapper:**
+
     ```bash
-   .\mvnw clean test jacoco:report
+    .\ mvnw clean test jacoco:report
     ```
 
 ## Cómo Visualisar el informe y la covertura
