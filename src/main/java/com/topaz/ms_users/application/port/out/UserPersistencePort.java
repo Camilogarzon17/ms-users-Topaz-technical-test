@@ -7,7 +7,7 @@ import com.topaz.ms_users.domain.model.User;
 
 public interface UserPersistencePort {
 
-   User save(User user);
+    User save(User user);
     Optional<User> findById(Long id);
     void deleteById(Long id);
     List<User> findAll();

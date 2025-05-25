@@ -3,6 +3,7 @@ package com.topaz.ms_users.infrastructure.adapter.input.web;
 import com.topaz.ms_users.application.port.in.UserServicePort;
 import com.topaz.ms_users.domain.exception.UserNotFoundException;
 import com.topaz.ms_users.domain.model.User;
+import com.topaz.ms_users.domain.model.dto.UserDTO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 class UserControllerTest {
@@ -22,7 +25,6 @@ class UserControllerTest {
 
     @InjectMocks
     private UserController userController;
-
 
     private User user;
 
@@ -37,13 +39,33 @@ class UserControllerTest {
     }
 
     @Test
+    void toDTO_shouldReturnUserDTO_whenUserIsValid() {
+        UserDTO dto = userController.toDTO(user);
+
+        assertNotNull(dto);
+        assertEquals(user.getId(), dto.getId());
+        assertEquals(user.getUsername(), dto.getUsername());
+    }
+
+    @Test
+    void toDTO_shouldReturnNull_whenUserIsNull() {
+        UserDTO dto = userController.toDTO(null);
+
+        assertNull(dto);
+    }
+
+    @Test
     void createUser_shouldReturnCreatedUser() {
         when(userServicePort.createUser(any(User.class))).thenReturn(user);
 
-        ResponseEntity<User> response = userController.createUser(user);
+        ResponseEntity<UserDTO> response = userController.createUser(user);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(user, response.getBody());
+        assertNotNull(response.getBody());
+        UserDTO responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(user.getId(), responseBody.getId());
+        assertEquals(user.getUsername(), responseBody.getUsername());
         verify(userServicePort, times(1)).createUser(user);
     }
 
@@ -51,10 +73,13 @@ class UserControllerTest {
     void getUserById_shouldReturnUser_whenFound() {
         when(userServicePort.getUserById(1L)).thenReturn(Optional.of(user));
 
-        ResponseEntity<User> response = userController.getUserById(1L);
+        ResponseEntity<UserDTO> response = userController.getUserById(1L);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(user, response.getBody());
+        UserDTO responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(user.getId(), responseBody.getId());
+        assertEquals(user.getUsername(), responseBody.getUsername());
         verify(userServicePort, times(1)).getUserById(1L);
     }
 
@@ -72,10 +97,13 @@ class UserControllerTest {
         User updated = User.builder().id(1L).username("updated").password("pass").build();
         when(userServicePort.updateUser(eq(1L), any(User.class))).thenReturn(updated);
 
-        ResponseEntity<User> response = userController.updateUser(1L, updated);
+        ResponseEntity<UserDTO> response = userController.updateUser(1L, updated);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(updated, response.getBody());
+        UserDTO responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals(updated.getId(), responseBody.getId());
+        assertEquals(updated.getUsername(), responseBody.getUsername());
         verify(userServicePort, times(1)).updateUser(1L, updated);
     }
 
@@ -95,7 +123,7 @@ class UserControllerTest {
         List<User> users = Arrays.asList(user, User.builder().id(2L).username("another").password("pass").build());
         when(userServicePort.getAllUsers()).thenReturn(users);
 
-        ResponseEntity<List<User>> response = userController.getAllUsers();
+        ResponseEntity<List<UserDTO>> response = userController.getAllUsers();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         verify(userServicePort, times(1)).getAllUsers();

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.topaz.ms_users.application.port.in.UserServicePort;
 import com.topaz.ms_users.domain.model.User;
+import com.topaz.ms_users.domain.model.dto.UserDTO;
 import com.topaz.ms_users.domain.exception.UserNotFoundException;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,6 +32,15 @@ public class UserController {
 
     private final UserServicePort userServicePort;
 
+    public UserDTO toDTO(User user) {
+        if (user == null)
+            return null;
+        return UserDTO.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .build();
+    }
+
     public UserController(UserServicePort userServicePort) {
         this.userServicePort = userServicePort;
     }
@@ -40,9 +50,9 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Invalid user data")
     })
     @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody User user) {
         User createdUser = userServicePort.createUser(user);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(toDTO(createdUser), HttpStatus.CREATED);
     }
 
     @Operation(summary = "Get user by ID", responses = {
@@ -50,10 +60,11 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         return userServicePort.getUserById(id)
-                .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
+                .map(user -> new ResponseEntity<>(toDTO(user), HttpStatus.OK))
                 .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
+
     }
 
     @Operation(summary = "Update an existing user", responses = {
@@ -62,9 +73,9 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Invalid user data")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails) {
         User updatedUser = userServicePort.updateUser(id, userDetails);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        return new ResponseEntity<>(toDTO(updatedUser), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete a user by ID", responses = {
@@ -82,8 +93,9 @@ public class UserController {
     })
 
     @GetMapping("/get-all-users")
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<User> users = userServicePort.getAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        List<UserDTO> userDTOs = users.stream().map(this::toDTO).toList();
+        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
     }
 }
