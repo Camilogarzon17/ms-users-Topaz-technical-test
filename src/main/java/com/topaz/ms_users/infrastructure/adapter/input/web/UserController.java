@@ -38,6 +38,7 @@ public class UserController {
         return UserDTO.builder()
                 .id(user.getId())
                 .username(user.getUsername())
+                .fullName(user.getFullName())
                 .build();
     }
 
@@ -64,7 +65,6 @@ public class UserController {
         return userServicePort.getUserById(id)
                 .map(user -> new ResponseEntity<>(toDTO(user), HttpStatus.OK))
                 .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
-
     }
 
     @Operation(summary = "Update an existing user", responses = {

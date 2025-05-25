@@ -4,9 +4,10 @@ import com.topaz.ms_users.domain.exception.UserNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
-
-
 
 class GlobalExceptionHandlerTest {
 
@@ -15,30 +16,45 @@ class GlobalExceptionHandlerTest {
     @Test
     void handleUserNotFoundException_returnsNotFound() {
         UserNotFoundException ex = new UserNotFoundException("User not found");
-        ResponseEntity<String> response = handler.handleUserNotFoundException(ex);
+        ResponseEntity<Map<String, Object>> response = handler.handleUserNotFoundException(ex);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertEquals("User not found", response.getBody());
+
+        Map<String, Object> body = response.getBody();
+        assertNotNull(body);
+        assertEquals(HttpStatus.NOT_FOUND.value(), body.get("status"));
+        assertEquals("User Not Found", body.get("error"));
+        assertEquals("User not found", body.get("message"));
+        assertNotNull(body.get("timestamp"));
     }
 
     @Test
     void handleIllegalArgumentException_returnsBadRequest() {
         IllegalArgumentException ex = new IllegalArgumentException("Invalid argument");
-        ResponseEntity<String> response = handler.handleIllegalArgumentException(ex);
+        ResponseEntity<Map<String, Object>> response = handler.handleIllegalArgumentException(ex);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("Invalid argument", response.getBody());
+
+        Map<String, Object> body = response.getBody();
+        assertNotNull(body);
+        assertEquals(HttpStatus.BAD_REQUEST.value(), body.get("status"));
+        assertEquals("Bad Request", body.get("error"));
+        assertEquals("Invalid argument", body.get("message"));
+        assertNotNull(body.get("timestamp"));
     }
 
     @Test
     void handleGenericException_returnsInternalServerError() {
         Exception ex = new Exception("Something went wrong");
-        ResponseEntity<String> response = handler.handleGenericException(ex);
+        ResponseEntity<Map<String, Object>> response = handler.handleGenericException(ex);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertNotNull(response.getBody());
-        String responseBody = response.getBody();
-        assertNotNull(responseBody);
-        assertTrue(responseBody.contains("An unexpected error occurred: Something went wrong"));
+
+        Map<String, Object> body = response.getBody();
+        assertNotNull(body);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), body.get("status"));
+        assertEquals("Internal Server Error", body.get("error"));
+        assertTrue(body.get("message").toString().contains("An unexpected error occurred: Something went wrong"));
+        assertNotNull(body.get("timestamp"));
     }
 }
