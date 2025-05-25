@@ -94,56 +94,55 @@ Para visualizar el informe se debe seguir los siguientes pasos:
 2.  **Explora los resultados y métricas de cobertura.**
 
 ## 🗂️ Estructura del Proyecto
-
+```plaintext
 ├── .mvn/
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── .gitignore
+├── .gitattributes
 ├── src/
 │   ├── main/
 │   │   ├── java/com/topaz/ms_users/
-│   │   │   ├── application/             # Lógica de negocio y orquestación (Capa de Aplicación)
-│   │   │   │   ├── port/                # Interfaces de puertos (entrada y salida)
-│   │   │   │   │   ├── in/              # Puertos de entrada (interfaz para el controlador)
-│   │   │   │   │   │   └── UserServicePort.java
-│   │   │   │   │   └── out/             # Puertos de salida (interfaz para la persistencia)
-│   │   │   │   │       └── UserPersistencePort.java
-│   │   │   │   └── service/             # Implementación de la lógica de negocio
-│   │   │   │       └── UserServiceImpl.java
-│   │   │   ├── domain/                  # Entidades de dominio y reglas de negocio (Capa de Dominio)
-│   │   │   │   ├── exception/           # Excepciones personalizadas del dominio
-│   │   │   │   │   └── UserNotFoundException.java
-│   │   │   │   └── model/               # Modelos de datos del dominio
-│   │   │   │       └── User.java
-│   │   │   ├── infrastructure/          # Adaptadores y configuración (Capa de Infraestructura)
-│   │   │   │   ├── adapter/             # Implementaciones de los puertos
-│   │   │   │   │   ├── input/web/       # Adaptadores de entrada (controladores REST)
-│   │   │   │   │   │   ├── GlobalExceptionHandler.java # Manejador global de excepciones
-│   │   │   │   │   │   └── UserController.java
-│   │   │   │   │   └── output/persistence/ # Adaptadores de salida (persistencia de datos)
-│   │   │   │   │       ├── UserJpaAdapter.java
-│   │   │   │   │       └── UserJpaRepository.java
-│   │   │   │   ├── config/              # Clases de configuración (CORS, Swagger)
-│   │   │   │   │   ├── CorsConfig.java
-│   │   │   │   │   └── SwaggerConfig.java
-│   │   │   │   ├── constants/           # Constantes de la aplicación
-│   │   │   │   │   └── HttpConstants.java
-│   │   │   │   └── security/            # Configuración de seguridad
-│   │   │   │       # (Archivos de seguridad, como configuración de autenticación/autorización)
-│   │   │   └── MsUsersApplication.java  # Clase principal de la aplicación Spring Boot
-│   │   └── resources/
-│   │       └── application.properties   # Archivo de configuración de la aplicación
+│   │   │   ├── 📁 application/                        # 🧠 Capa de Aplicación: orquestación de casos de uso
+│   │   │   │   ├── 📁 port/
+│   │   │   │   │   ├── 📁 in/                         # 🎯 Puertos de entrada (interfaces para controladores)
+│   │   │   │   │   │   └── 📄 UserServicePort.java
+│   │   │   │   │   └── 📁 out/                        # 📤 Puertos de salida (interfaces para persistencia)
+│   │   │   │   │       └── 📄 UserPersistencePort.java
+│   │   │   │   └── 📁 service/                        # ⚙️ Implementaciones de la lógica de negocio
+│   │   │   │       └── 📄 UserServiceImpl.java
+│   │   │   ├── 📁 domain/                             # 🧩 Capa de Dominio: entidades y reglas del negocio
+│   │   │   │   ├── 📁 exception/                      # 🚨 Excepciones del dominio
+│   │   │   │   │   └── 📄 UserNotFoundException.java
+│   │   │   │   └── 📁 model/                          # 📦 Modelos de dominio
+│   │   │   │       └── 📄 User.java
+│   │   │   ├── 📁 infrastructure/                     # 🏗️ Capa de Infraestructura: adaptadores y configuración
+│   │   │   │   ├── 📁 adapter/
+│   │   │   │   │   ├── 📁 input/web/                  # 🌐 Adaptadores de entrada (controladores REST)
+│   │   │   │   │   │   ├── 📄 GlobalExceptionHandler.java
+│   │   │   │   │   │   └── 📄 UserController.java
+│   │   │   │   │   └── 📁 output/persistence/         # 💾 Adaptadores de salida (persistencia)
+│   │   │   │   │       ├── 📄 UserJpaAdapter.java
+│   │   │   │   │       └── 📄 UserJpaRepository.java
+│   │   │   │   ├── 📁 config/                         # ⚙️ Configuraciones generales (CORS, Swagger, etc.)
+│   │   │   │   │   ├── 📄 CorsConfig.java
+│   │   │   │   │   └── 📄 SwaggerConfig.java
+│   │   │   │   ├── 📁 constants/                      # 🧾 Constantes reutilizables
+│   │   │   │   │   └── 📄 HttpConstants.java
+│   │   │   │   └── 📁 security/                       # 🔐 Configuración de seguridad (auth/autz)
+│   │   │   └── 📄 MsUsersApplication.java             # 🚀 Clase principal de la app Spring Boot
+│   │   └── 📁 resources/
+│   │       └── 📄 application.properties              # ⚙️ Archivo de configuración principal
 │   └── test/java/com/topaz/ms_users/
-│       ├── aplication/service/          # Pruebas unitarias para la capa de aplicación
-│       │   └── UserServiceImplTest.java
-│       ├── infraestructure              # Pruebas unitarias para la capa de infraestrctura 
-│       │   │   ├── adapter/           
-│       │   │   │   ├── input/web/       
-│       │   │   │   │   ├── GlobalExceptionHandlerTes.java
-│       │   │   │   │   └── UserControllerTest.java
-│       └── MsUsersApplicationTests.java # Pruebas de integración básicas
-├── .gitattributes
-├── .gitignore
-├── mvnw
-├── mvnw.cmd
-└── pom.xml  
+│       ├── 📁 application/service/                    # 🧪 Pruebas unitarias - Capa de aplicación
+│       │   └── 📄 UserServiceImplTest.java
+│       ├── 📁 infrastructure/                         # 🧪 Pruebas unitarias - Capa de infraestructura
+│       │   └── 📁 adapter/input/web/
+│       │       ├── 📄 GlobalExceptionHandlerTest.java
+│       │       └── 📄 UserControllerTest.java
+│       └── 📄 MsUsersApplicationTests.java            # 🔍 Pruebas de integración de la app
+```
 
 ## Autor
 
