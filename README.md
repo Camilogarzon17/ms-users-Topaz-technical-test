@@ -76,18 +76,20 @@ La documentación de la API interactiva está disponible en: `http://localhost:8
 
 Para generar el informe de cobertura de pruebas utilizando JaCoCo, ejecuta el siguiente comando Maven: [cite: 11, 16]
 
-```bash
-mvn clean test jacoco:report
+    ```bash
+    mvn clean test jacoco:report
+    ```
 
 **O si estás en Windows con wrapper:**
     ```bash
    .\mvnw clean test jacoco:report
     ```
+
 ## Cómo Visualisar el informe y la covertura
 
 Para visualizar el informe se debe seguir los siguientes pasos:
 
-1.  **navega hasta la carpeta .\ms-users\target\site\jacoco\**
+1.  **navega hasta la carpeta .\ms-users\target\site\jacoco**
 2.  **ubicar el archivo index.html**
 2.  **Explora los resultados y métricas de cobertura.**
 
