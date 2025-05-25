@@ -12,6 +12,5 @@ public class HttpConstants {
     public static final String VAL_METHOD_OPTIONS = "OPTIONS";
     public static final String VAL_METHOD_ALLOWED = "*";
     public static final String VAL_METHOD_MAPP = "/";
-    public static final String DB_PASSWORD = "Cam1121722.";
-    public static final String DB_USERNAME = "Ms-user.";
+    
 }
