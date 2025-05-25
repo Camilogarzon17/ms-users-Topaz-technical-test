@@ -1,9 +1,98 @@
-Microservicio de Gestión de Usuarios con Spring BootEste proyecto es un microservicio de gestión de usuarios que permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando Spring Boot. Ha sido diseñado siguiendo la arquitectura hexagonal, aplicando buenas prácticas de programación, e incluyendo pruebas unitarias robustas y una gestión de seguridad básica.🌟 Características PrincipalesGestión de Usuarios: Operaciones CRUD completas para el modelo User, que incluye campos como ID (autogenerado), Nombre de usuario y Contraseña (almacenada de forma encriptada).Documentación API Interactiva: Generación automática de documentación interactiva de la API utilizando OpenAPI 3 (Swagger), facilitando la exploración y prueba de los endpoints.Gestión de Errores Robusta: Manejo adecuado de excepciones, proporcionando mensajes de error claros y significativos junto con los códigos de estado HTTP apropiados para una mejor experiencia del consumidor de la API.Arquitectura Hexagonal: Separación clara y modular entre las capas de dominio, aplicación e infraestructura, utilizando interfaces para desacoplar las dependencias y mejorar la mantenibilidad.Pruebas Unitarias de Alta Cobertura: Implementación de pruebas unitarias exhaustivas utilizando JUnit y Mockito, con un objetivo de cobertura mínima del 85%. Se genera un informe detallado con JaCoCo.Calidad y Seguridad del Código: Adherencia a principios SOLID y estándares de código limpio para garantizar la calidad. Se implementan buenas prácticas para prevenir vulnerabilidades críticas o altas, complementado con análisis estático.🚀 Tecnologías UtilizadasSpring Boot: Framework principal para el desarrollo del microservicio.Java: Lenguaje de programación.Maven: Herramienta de gestión de proyectos y dependencias.JUnit: Framework para pruebas unitarias.Mockito: Framework para la creación de mocks en pruebas unitarias.JaCoCo: Herramienta para generar informes de cobertura de código.OpenAPI 3 (Swagger): Para la documentación interactiva de la API.🛠️ Requisitos del SistemaPara ejecutar este proyecto, necesitarás tener instalado:Java Development Kit (JDK) versión 17 o superior.Apache Maven versión 3.6.0 o superior.📦 Cómo Ejecutar el ProyectoSigue estos pasos para poner en marcha el microservicio en tu entorno local:Clonar el repositorio:git clone https://github.com/Camilogarzon17/ms-users-Topaz-technical-test.git
-cd ms-users-Topaz-technical-test # Asegúrate de estar en el directorio raíz del proyecto
-Construir el proyecto con Maven:Este comando compilará el código, ejecutará las pruebas y empaquetará la aplicación.mvn clean install
-Ejecutar la aplicación Spring Boot:Una vez que la construcción sea exitosa, puedes iniciar la aplicación.mvn spring-boot:run
-La aplicación se iniciará en http://localhost:8080.Endpoints de la APILa documentación de la API interactiva está disponible en: http://localhost:8080/swagger-ui.html.Aquí están los principales endpoints disponibles:POST /topaz/v1/api/users: Crear un nuevo usuario.GET /topaz/v1/api/users/{id}: Obtener un usuario por ID.PUT /topaz/v1/api/users/{id}: Actualizar un usuario existente.DELETE /topaz/v1/api/users/{id}: Eliminar un usuario por ID.GET /topaz/v1/api/users/get-all-users: Obtener todos los usuarios.📊 Cómo Generar el Informe de Cobertura de PruebasPara generar el informe de cobertura de pruebas utilizando JaCoCo, ejecuta el siguiente comando Maven:mvn clean test jacoco:report
-Cómo Visualizar el Informe de CoberturaUna vez generado el informe, puedes visualizarlo siguiendo estos pasos:Navega hasta la carpeta:./target/site/jacoco/ (dentro del directorio raíz de tu proyecto).Ubica el archivo index.html:Ábrelo en tu navegador web preferido.Explora los resultados y métricas de cobertura:El informe te mostrará el porcentaje de cobertura de código por paquete, clase y método.🗂️ Estructura del Proyecto.
+# Microservicio de Gestión de Usuarios con Spring Boot
+
+Este proyecto es un microservicio de gestión de usuarios que permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando Spring Boot. [cite: 2] Implementa la arquitectura hexagonal, buenas prácticas de programación, pruebas unitarias y gestión de seguridad básica. [cite: 3, 8, 9, 10, 11]
+
+## 📌 Requerimientos Funcionales
+
+* **Gestión de Usuarios**: Operaciones CRUD para el modelo `User` con campos `ID` (autogenerado), `Nombre de usuario` y `Contraseña` (almacenada de forma encriptada). [cite: 4, 5]
+* **Documentación API**: Generación de documentación interactiva de la API utilizando OpenAPI 3 (Swagger). [cite: 5]
+* **Gestión de Errores**: Manejo adecuado de excepciones y provisión de mensajes de error significativos con códigos de estado HTTP adecuados. [cite: 6, 7]
+
+---
+
+## ⚙️ Requerimientos Técnicos
+
+- **Arquitectura Hexagonal**: Separación clara entre capas de dominio, aplicación e infraestructura mediante interfaces. [cite: 8]
+- **Buenas Prácticas**: Aplicación de principios SOLID, código limpio y estándares de programación. [cite: 9]
+- **Pruebas Unitarias**: Uso de **JUnit** y **Mockito** con una cobertura mínima del 85%. Generación de informe con **JaCoCo**. [cite: 10, 11, 19]
+- **Seguridad y Calidad del Código**: Sin vulnerabilidades críticas o altas simuladas con buenas prácticas y análisis estático. [cite: 11, 20]
+- **Gestión del Proyecto**: Uso de **Maven** para la gestión de dependencias y construcción. [cite: 13]
+
+---
+
+## 🚀 Tecnologías Utilizadas
+
+**Spring Boot: Framework principal para el desarrollo del microservicio.**
+
+**Java: Lenguaje de programación.**
+
+**Maven: Herramienta de gestión de proyectos y dependencias.**
+
+**JUnit: Framework para pruebas unitarias.**
+
+**Mockito: Framework para la creación de mocks en pruebas unitarias.**
+
+**JaCoCo: Herramienta para generar informes de cobertura de código.**
+
+**OpenAPI 3 (Swagger): Para la documentación interactiva de la API.**
+
+## 🛠️ Requisitos del Sistema
+
+Para ejecutar este proyecto, necesitarás tener instalado:
+
+Java Development Kit (JDK) versión 17 o superior.
+
+Apache Maven versión 3.6.0 o superior.
+
+## 📦 Cómo Ejecutar el Proyecto
+
+1.  **Clonar el repositorio:**
+
+    ```bash
+    git clone https://github.com/Camilogarzon17/ms-users-Topaz-technical-test.git
+    cd user_management
+    ```
+2.  **Construir el proyecto con Maven:**
+    ```bash
+    mvn clean install
+    ```
+3.  **Ejecutar la aplicación Spring Boot:**
+    ```bash
+    mvn spring-boot:run
+    ```
+    La aplicación se iniciará en `http://localhost:8080`.
+
+### Endpoints de la API:
+
+La documentación de la API interactiva está disponible en: `http://localhost:8080/swagger-ui.html`[cite: 5].
+
+* `POST /topaz/v1/api/users`: Crear un nuevo usuario.
+* `GET /topaz/v1/api/users/{id}`: Obtener un usuario por ID.
+* `PUT /topaz/v1/api/users/{id}`: Actualizar un usuario existente.
+* `DELETE /topaz/v1/api/users/{id}`: Eliminar un usuario por ID.
+* `GET /topaz/v1/api/users/get-all-users`: Obtener todos los usuarios.
+
+## 📊 Cómo Generar el Informe de Cobertura de Pruebas
+
+Para generar el informe de cobertura de pruebas utilizando JaCoCo, ejecuta el siguiente comando Maven: [cite: 11, 16]
+
+```bash
+mvn clean test jacoco:report
+
+**O si estás en Windows con wrapper:**
+    ```bash
+   .\mvnw clean test jacoco:report
+    ```
+## Cómo Visualisar el informe y la covertura
+
+Para visualizar el informe se debe seguir los siguientes pasos:
+
+1.  **navega hasta la carpeta .\ms-users\target\site\jacoco\**
+2.  **ubicar el archivo index.html**
+2.  **Explora los resultados y métricas de cobertura.**
+
+## 🗂️ Estructura del Proyecto
+
 ├── .mvn/
 ├── src/
 │   ├── main/
@@ -52,7 +141,8 @@ Cómo Visualizar el Informe de CoberturaUna vez generado el informe, puedes visu
 ├── .gitignore
 ├── mvnw
 ├── mvnw.cmd
-└── pom.xml                              
+└── pom.xml  
 
-# Archivo de configuración de Maven
-🤝 Contribución¡Las contribuciones son bienvenidas! Si deseas mejorar este proyecto, por favor, sigue estos pasos:Haz un "fork" de este repositorio.Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).Realiza tus cambios y asegúrate de que las pruebas pasen.Haz "commit" de tus cambios (git commit -m 'feat: Añade nueva funcionalidad').Sube tus cambios a tu "fork" (git push origin feature/nueva-funcionalidad).Abre un "Pull Request" describiendo tus cambios.📄 LicenciaEste proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.📧 ContactoPara cualquier consulta o comentario, no dudes en contactar al autor:Camilo GarzonCorreo Electrónico: camilogarzon1722@hotmail.comGitHub: Camilogarzon17
+## Autor
+
+Desarrollado por Camilo Garzon – camilogarzon1722@hotmail.com
