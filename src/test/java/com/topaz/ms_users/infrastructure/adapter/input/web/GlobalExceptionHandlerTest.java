@@ -14,7 +14,7 @@ class GlobalExceptionHandlerTest {
     private final GlobalExceptionHandler handler = new GlobalExceptionHandler();
 
     @Test
-    void handleUserNotFoundException_returnsNotFound() {
+    void handleUserNotFoundExceptionReturnsNotFound() {
         UserNotFoundException ex = new UserNotFoundException("User not found");
         ResponseEntity<Map<String, Object>> response = handler.handleUserNotFoundException(ex);
 

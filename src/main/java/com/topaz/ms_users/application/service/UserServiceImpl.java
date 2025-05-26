@@ -37,6 +37,8 @@ public class UserServiceImpl implements UserServicePort {
                 .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
 
         existingUser.setUsername(userDetails.getUsername());
+        existingUser.setFullName(userDetails.getFullName());
+
         if (userDetails.getPassword() != null && !userDetails.getPassword().isEmpty()) {
             existingUser.setPassword(passwordEncoder.encode(userDetails.getPassword()));
         }
